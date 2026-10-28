@@ -1,0 +1,12 @@
+node_modules
+backend/node_modules
+frontend/node_modules
+frontend/dist
+backend/data
+*.db
+*.db-journal
+.git
+uploads
+*.log
+npm-debug.log
+.DS_Store

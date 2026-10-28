@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marble Arch Hotel Nairobi — Parking (Single-File Demo)</title>
+<style>
+:root{
+  --navy:#0b2545; --navy2:#14315e; --navy3:#1e4c8f;
+  --gold:#c9a227; --gold-hi:#e3c565; --gold-soft:#faf3dd;
+  --bg:#e9edf4; --card:#fff; --ink:#1b2735; --muted:#64748f; --line:#dde4f0;
+  --ok:#1c7a4b; --ok-bg:#e2f4e9; --warn:#96690f; --warn-bg:#fdf0d3;
+  --err:#b3261e; --err-bg:#fbe7e5; --info:#1d5fb8; --info-bg:#e4edfc;
+  --radius:14px; --shadow:0 1px 2px rgba(11,37,69,.07),0 4px 14px rgba(11,37,69,.07);
+  --shadow-md:0 2px 4px rgba(11,37,69,.08),0 10px 28px rgba(11,37,69,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;font-size:15px;color:var(--ink);
+  background:radial-gradient(1100px 320px at 85% -120px,rgba(201,162,39,.10),transparent 60%),radial-gradient(900px 420px at -10% 0%,rgba(30,76,143,.10),transparent 55%),var(--bg)}
+h2{margin:0;font-size:22px;color:var(--navy);letter-spacing:-.3px}
+h3{margin:0 0 12px;font-size:17px;color:var(--navy)}
+.muted{color:var(--muted);font-size:13px}
+header.top{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 70%,var(--navy3) 100%);color:#fff;padding:14px 20px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow-md);position:sticky;top:0;z-index:30}
+.brand-mark{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--gold-hi),var(--gold) 60%,#a5851f);color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:19px;box-shadow:0 3px 10px rgba(201,162,39,.45),inset 0 1px 0 rgba(255,255,255,.5)}
+.brand-name{font-weight:800;font-size:17px}
+.brand-sub{font-size:12px;color:var(--gold-hi);font-weight:600}
+.clock{margin-left:auto;text-align:right;font-size:13px;color:#cfdaea}
+.clock b{color:#fff;font-size:15px}
+nav.tabs{display:flex;gap:8px;padding:12px 20px 0;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.tab-btn{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:10px 18px;font-size:14.5px;font-weight:700;cursor:pointer;color:var(--ink);font-family:inherit}
+.tab-btn:hover{border-color:var(--navy3)}
+.tab-btn.on{background:linear-gradient(135deg,var(--navy3),var(--navy));color:#fff;border-color:var(--navy);box-shadow:0 3px 10px rgba(11,37,69,.3)}
+main{max-width:1200px;margin:0 auto;padding:16px 20px 40px}
+.panel{display:none;animation:fadeUp .2s ease}
+.panel.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card{background:var(--card);border:1px solid rgba(221,228,240,.9);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-bottom:16px;overflow-x:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.form{display:flex;flex-direction:column;gap:12px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.frow{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px;font-size:14px}
+.field-label{font-weight:700;font-size:13px;color:var(--navy)}
+.input,select.input,textarea.input{border:1.5px solid var(--line);border-radius:9px;padding:10px 12px;font-size:15px;width:100%;background:#fff;color:var(--ink);font-family:inherit}
+.input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,39,.22)}
+.reg-input{text-transform:uppercase;font-weight:700;letter-spacing:1px}
+.btn{border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 16px;font-size:14.5px;cursor:pointer;color:var(--ink);font-weight:700;font-family:inherit}
+.btn:hover{background:#f3f6fb;transform:translateY(-1px);box-shadow:var(--shadow)}
+.btn:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-primary{background:linear-gradient(135deg,var(--navy3),var(--navy) 70%);border-color:var(--navy);color:#fff;box-shadow:0 3px 10px rgba(11,37,69,.3)}
+.btn-primary:hover{background:linear-gradient(135deg,#2561ad,var(--navy2) 70%)}
+.btn-danger{background:linear-gradient(135deg,#cf3a32,var(--err));border-color:var(--err);color:#fff}
+.btn-sm{padding:6px 11px;font-size:13px;border-radius:8px}
+.btn-block{width:100%}
+.btn-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.table{width:100%;border-collapse:collapse;font-size:14px}
+.table th{text-align:left;padding:9px 10px;color:var(--navy);font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;background:#f1f5fb;border-bottom:2px solid var(--line);white-space:nowrap}
+.table td{padding:9px 10px;border-bottom:1px solid #eef2f7;vertical-align:top}
+.table tbody tr:hover td{background:#f6f9fd}
+.kv{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:12px}
+.kv td{padding:7px 8px;border-bottom:1px solid #eef2f7}
+.kv td:first-child{color:var(--muted)}
+.kv td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.kv tr.total td{font-size:17px;font-weight:800;border-top:2px solid var(--ink)}
+.badge{display:inline-block;border-radius:20px;padding:3px 11px;font-size:12px;font-weight:800;white-space:nowrap;border:1px solid transparent}
+.badge-ok{background:var(--ok-bg);color:var(--ok);border-color:#b5e0c8}
+.badge-warn{background:var(--warn-bg);color:var(--warn);border-color:#eed9a4}
+.badge-err{background:var(--err-bg);color:var(--err);border-color:#f2beb9}
+.badge-info{background:var(--info-bg);color:var(--info);border-color:#bcd2f3}
+.badge-muted{background:#eef1f6;color:var(--muted);border-color:#d7dee9}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:linear-gradient(180deg,#fff,#fbfcfe);border:1px solid rgba(221,228,240,.9);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px;border-left:5px solid var(--line)}
+.stat-ok{border-left-color:var(--ok)}.stat-warn{border-left-color:var(--gold)}.stat-err{border-left-color:var(--err)}
+.stat-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;font-weight:700}
+.stat-value{font-size:25px;font-weight:800;margin-top:4px;color:var(--navy);font-variant-numeric:tabular-nums}
+.alert{border-radius:10px;padding:11px 13px;font-size:14px;margin-bottom:12px;font-weight:600}
+.alert-err{background:var(--err-bg);color:var(--err);border:1px solid #f2beb9}
+.alert-warn{background:var(--warn-bg);color:var(--warn);border:1px solid #eed9a4}
+.alert-ok{background:var(--ok-bg);color:var(--ok);border:1px solid #b5e0c8}
+.alert-info{background:var(--info-bg);color:var(--info);border:1px solid #bcd2f3}
+.bay-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:9px}
+.bay{border:none;border-radius:10px;padding:10px 6px;cursor:pointer;color:#fff;display:flex;flex-direction:column;gap:2px;min-height:62px;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(11,37,69,.2),inset 0 1px 0 rgba(255,255,255,.25);font-family:inherit}
+.bay:hover{transform:scale(1.05)}
+.bay-code{font-weight:800;font-size:14px}.bay-reg{font-size:11px;word-break:break-all}
+.bay-free{background:linear-gradient(135deg,#37b06c,#25854c)}
+.bay-busy{background:linear-gradient(135deg,#e05252,#b93535)}
+.bay-comp{background:linear-gradient(135deg,#2b74d4,#164a94)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0;font-size:13px;font-weight:600}
+.legend .sw{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:4px;vertical-align:-2px}
+.method-tabs{display:flex;gap:8px}
+.method-tab{flex:1;border:2px solid var(--line);background:#fff;border-radius:10px;padding:12px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
+.method-tab.on{border-color:var(--navy);background:linear-gradient(135deg,var(--navy3),var(--navy));color:#fff}
+.modal-overlay{position:fixed;inset:0;background:rgba(9,22,40,.6);display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;z-index:100;overflow-y:auto}
+.modal{background:#fff;border-radius:16px;width:100%;max-width:520px;box-shadow:0 24px 70px rgba(0,0,0,.35);overflow:hidden}
+.modal-wide{max-width:680px}
+.modal-head{display:flex;justify-content:space-between;align-items:center;padding:15px 19px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fbfcfe,#f3f6fb)}
+.modal-head h3{margin:0}
+.modal-body{padding:19px}
+.icon-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink);border-radius:8px;padding:2px 8px}
+.icon-btn:hover{background:#eef2f7}
+.toasts{position:fixed;bottom:20px;right:20px;z-index:200;display:flex;flex-direction:column;gap:8px;max-width:min(420px,90vw)}
+.toast{border-radius:11px;padding:12px 16px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);background:var(--navy);color:#fff;animation:fadeUp .2s ease}
+.toast-ok{background:linear-gradient(135deg,#23915a,var(--ok))}
+.toast-err{background:linear-gradient(135deg,#cf3a32,var(--err))}
+.toast-warn{background:linear-gradient(135deg,#a5760f,#8a5d0b)}
+.ticket-no{text-align:center;font-size:24px;font-weight:800;letter-spacing:1px;margin:10px 0;padding:10px;border:2px dashed var(--navy);border-radius:10px}
+.doc-head{text-align:center;margin-bottom:12px}
+.doc-hotel{font-weight:800;font-size:18px;color:var(--navy)}
+.doc-sub{font-size:12px;color:var(--muted)}
+.doc-title{text-align:center;font-weight:800;letter-spacing:2px;margin:10px 0;font-size:15px}
+.doc-foot{text-align:center;font-size:12px;margin-top:10px;padding-top:8px;border-top:1px solid var(--line)}
+.pin-row{display:flex;gap:8px}
+footer.page{max-width:1200px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:12.5px}
+#setup-view{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(700px 380px at 20% 15%,rgba(201,162,39,.22),transparent 60%),linear-gradient(135deg,#081a33 0%,var(--navy2) 55%,#1d4e89 100%)}
+.setup-card{background:#fff;border-radius:18px;padding:34px;width:100%;max-width:440px;box-shadow:0 24px 70px rgba(0,0,0,.4);border-top:5px solid var(--gold)}
+#print-area{display:none}
+@media print{
+  @page{margin:0}
+  body.printing #app,body.printing #setup-view,body.printing .toasts,body.printing .modal-overlay{display:none!important}
+  body.printing #print-area{display:block;padding:12mm 10mm}
+}
+</style>
+</head>
+<body>
+
+<div id="setup-view" style="display:none">
+  <div class="setup-card">
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="brand-mark" style="margin:0 auto 10px">MA</div>
+      <h2>First-time setup</h2>
+      <p class="muted">Choose the admin PIN for this PC. Nothing is hard-coded — the PIN is stored only in this browser (hashed).</p>
+    </div>
+    <div class="form">
+      <label class="field"><span class="field-label">Hotel name</span><input id="s-hotel" class="input" value="Marble Arch Hotel Nairobi"></label>
+      <label class="field"><span class="field-label">Admin PIN (4 or more digits, numbers only)</span><input id="s-pin1" class="input" type="password" inputmode="numeric" maxlength="12" placeholder="e.g. 2468" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></label>
+      <label class="field"><span class="field-label">Confirm PIN</span><input id="s-pin2" class="input" type="password" inputmode="numeric" maxlength="12" placeholder="Repeat PIN" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></label>
+      <button class="btn btn-primary btn-block" onclick="doSetup()">Start using the system</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" style="display:none">
+  <header class="top">
+    <div class="brand-mark">MA</div>
+    <div><div class="brand-name" id="hdr-hotel">Marble Arch Hotel Nairobi</div><div class="brand-sub">Parking Management · single-file demo</div></div>
+    <div class="clock"><b id="clock-time">--:--</b><br><span id="clock-date">—</span> · EAT</div>
+  </header>
+  <nav class="tabs">
+    <button class="tab-btn on" data-tab="entry" onclick="showTab('entry')">🚗 Entry</button>
+    <button class="tab-btn" data-tab="exit" onclick="showTab('exit')">🏁 Exit &amp; Payment</button>
+    <button class="tab-btn" data-tab="live" onclick="showTab('live')">🅿️ Live Bays</button>
+    <button class="tab-btn" data-tab="report" onclick="showTab('report')">📊 Daily Report</button>
+    <button class="tab-btn" data-tab="settings" onclick="askSettings()">⚙️ Settings</button>
+  </nav>
+  <main>
+    <section class="panel on" id="panel-entry">
+      <div class="card">
+        <h3>Vehicle entry <span class="badge badge-ok" id="entry-free"></span></h3>
+        <div class="form">
+          <div class="frow">
+            <label class="field"><span class="field-label">Registration number *</span><input id="e-reg" class="input reg-input" placeholder="KDD 223F" style="font-size:18px"></label>
+            <label class="field"><span class="field-label">Vehicle type</span><select id="e-type" class="input"><option>Saloon</option><option>SUV</option><option>Van</option><option>Truck</option><option>Motorbike</option><option>Bus</option></select></label>
+          </div>
+          <div class="frow">
+            <label class="field"><span class="field-label">Driver / customer name</span><input id="e-name" class="input" placeholder="Optional"></label>
+            <label class="field"><span class="field-label">Phone</span><input id="e-phone" class="input" placeholder="Optional"></label>
+          </div>
+          <div class="frow">
+            <label class="field"><span class="field-label">Parking category *</span><select id="e-cat" class="input" onchange="toggleComp()"><option value="daily">Daily Customer</option><option value="comp">Complimentary</option></select></label>
+            <label class="field"><span class="field-label">Bay</span><select id="e-bay" class="input"><option value="">Auto-assign</option></select></label>
+          </div>
+          <div id="e-compbox" style="display:none;background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:12px">
+            <div class="frow">
+              <label class="field"><span class="field-label">Authorised by *</span><input id="e-compby" class="input" placeholder="Manager / supervisor name"></label>
+              <label class="field"><span class="field-label">Reason</span><input id="e-compreason" class="input" placeholder="e.g. VIP guest"></label>
+            </div>
+            <p class="muted" style="margin:8px 0 0">Complimentary entry needs the authoriser's name <b>and</b> the admin PIN.</p>
+          </div>
+          <div class="btn-row"><button class="btn btn-primary btn-block" style="font-size:17px;padding:14px" onclick="doEntry()">🎟 Issue ticket</button></div>
+        </div>
+      </div>
+      <div class="card"><h3>Currently parked</h3><div id="entry-active"></div></div>
+    </section>
+
+    <section class="panel" id="panel-exit">
+      <div class="card">
+        <h3>Find vehicle</h3>
+        <div class="frow">
+          <label class="field"><span class="field-label">Registration or ticket number</span><input id="x-q" class="input reg-input" placeholder="KDD223F or MA-…"></label>
+          <div class="field"><span class="field-label">&nbsp;</span><button class="btn btn-primary" onclick="doFind()">Find</button></div>
+        </div>
+      </div>
+      <div id="x-result"></div>
+    </section>
+
+    <section class="panel" id="panel-live">
+      <div class="card">
+        <h3>Live bays <span class="badge badge-info" id="live-count"></span></h3>
+        <div class="legend"><span><span class="sw" style="background:#2f9e5f"></span>Free</span><span><span class="sw" style="background:#d64545"></span>Occupied (paid)</span><span><span class="sw" style="background:#1d5fb8"></span>Complimentary</span></div>
+        <div class="bay-grid" id="live-grid"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="panel-report">
+      <div class="card">
+        <h3>Daily report</h3>
+        <div class="frow">
+          <label class="field"><span class="field-label">Date (East Africa Time)</span><input id="r-date" type="date" class="input" onchange="renderReport()"></label>
+          <div class="field"><span class="field-label">&nbsp;</span><div class="btn-row" style="margin-top:0">
+            <button class="btn btn-sm" onclick="downloadCsv()">⬇ CSV</button>
+            <button class="btn btn-sm" onclick="copyCsv()">📋 Copy</button>
+            <button class="btn btn-sm" onclick="printReport()">🖨 Print</button>
+          </div></div>
+        </div>
+      </div>
+      <div id="r-out"></div>
+    </section>
+
+    <section class="panel" id="panel-settings">
+      <div class="card">
+        <h3>Hotel &amp; tariff settings</h3>
+        <div class="form">
+          <label class="field"><span class="field-label">Hotel name</span><input id="t-hotel" class="input"></label>
+          <div class="frow">
+            <label class="field"><span class="field-label">Rate (per 24 hours)</span><input id="t-rate" class="input" type="number" min="0" step="1"></label>
+            <label class="field"><span class="field-label">Currency</span><input id="t-cur" class="input" maxlength="5"></label>
+          </div>
+          <div class="frow">
+            <label class="field"><span class="field-label">Grace period (minutes)</span><input id="t-grace" class="input" type="number" min="0" step="1"></label>
+            <label class="field"><span class="field-label">Number of bays</span><input id="t-bays" class="input" type="number" min="1" max="2000" step="1"></label>
+          </div>
+          <div class="btn-row"><button class="btn btn-primary" onclick="saveSettings()">💾 Save settings</button></div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <h3>Admin PIN</h3>
+          <div class="form">
+            <label class="field"><span class="field-label">Current PIN</span><input id="p-cur" class="input" type="password" inputmode="numeric" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></label>
+            <label class="field"><span class="field-label">New PIN (4 or more digits, numbers only)</span><input id="p-new" class="input" type="password" inputmode="numeric" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')"></label>
+            <div class="btn-row"><button class="btn" onclick="changePin()">Change PIN</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Backup &amp; reset</h3>
+          <p class="muted">Data lives only in this browser. Download a backup daily; restore it after clearing browser data or moving PCs.</p>
+          <div class="btn-row">
+            <button class="btn" onclick="downloadBackup()">⬇ Download backup</button>
+            <label class="btn" style="cursor:pointer">📂 Restore backup<input type="file" id="restore-file" accept=".json" style="display:none" onchange="restoreBackup(this)"></label>
+          </div>
+          <div class="btn-row"><button class="btn btn-danger" onclick="resetAll()">🗑 Erase everything (needs PIN)</button></div>
+        </div>
+      </div>
+      <div class="card"><h3>Activity log</h3><div id="audit-list"></div></div>
+    </section>
+  </main>
+  <footer class="page">Single-file demo · all data stays in this browser on this PC · East Africa Time throughout · complimentary parking always needs an authoriser + the admin PIN.</footer>
+</div>
+
+<div id="modal-root"></div>
+<div class="toasts" id="toasts"></div>
+<div id="print-area"></div>
+
+<script>
+'use strict';
+/* ================= storage ================= */
+var LS_KEY = 'ma_park_v1';
+var state = null;
+function save(){ try{ localStorage.setItem(LS_KEY, JSON.stringify(state)); }catch(e){ toast('Could not save to browser storage', 'err'); } }
+function load(){
+  try{ var raw = localStorage.getItem(LS_KEY); if(raw){ state = JSON.parse(raw); return; } }catch(e){}
+  state = null;
+}
+/* ================= helpers ================= */
+var TZ = 'Africa/Nairobi';
+var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function eatParts(iso){
+  var p = new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(iso));
+  var o = {}; for(var i=0;i<p.length;i++) o[p[i].type]=p[i].value;
+  if(o.hour==='24') o.hour='00';
+  return o;
+}
+function eatDayDash(iso){ var p=eatParts(iso); return p.year+'-'+p.month+'-'+p.day; }
+function eatDay(iso){ var p=eatParts(iso); return p.year+p.month+p.day; }
+function fmtDT(iso){ if(!iso) return '-'; var p=eatParts(iso); return p.day+' '+MON[Number(p.month)-1]+' '+p.year+', '+p.hour+':'+p.minute; }
+function todayEatDash(){ return eatDayDash(new Date().toISOString()); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+function normReg(s){ return String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,''); }
+function fmtMoney(n){ var c=(state&&state.settings.currency)||'KES'; var v=Number(n)||0; return c+' '+v.toLocaleString('en-KE',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtDur(mins){ mins=Math.max(0,Math.floor(mins||0)); var d=Math.floor(mins/1440),h=Math.floor((mins%1440)/60),m=mins%60; if(d>0)return d+'d '+h+'h'; if(h>0)return h+'h '+m+'m'; return m+'m'; }
+function toast(msg,kind){
+  kind=kind||'info';
+  var t=document.createElement('div'); t.className='toast toast-'+kind; t.textContent=msg;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(function(){ t.remove(); },4500);
+}
+function audit(msg){ state.audit.unshift({t:new Date().toISOString(),msg:String(msg)}); if(state.audit.length>300) state.audit.length=300; }
+function openModal(title,bodyHtml,wide){
+  var root=document.getElementById('modal-root');
+  root.innerHTML='<div class="modal-overlay" onclick="if(event.target===this)closeModal()"><div class="modal'+(wide?' modal-wide':'')+'"><div class="modal-head"><h3>'+esc(title)+'</h3><button class="icon-btn" onclick="closeModal()">✕</button></div><div class="modal-body">'+bodyHtml+'</div></div></div>';
+}
+function closeModal(){ document.getElementById('modal-root').innerHTML=''; }
+/* ================= PIN (hashed, never hard-coded) ================= */
+function cyrb53(str){
+  var h1=0xdeadbeef,h2=0x41c6ce57;
+  for(var i=0;i<str.length;i++){ var ch=str.charCodeAt(i); h1=Math.imul(h1^ch,2654435761); h2=Math.imul(h2^ch,1597334677); }
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (h2>>>0).toString(16)+(h1>>>0).toString(16);
+}
+function hashPin(pin){
+  var s='ma-parking::'+String(pin);
+  try{
+    if(window.crypto && crypto.subtle){
+      return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(b){
+        return {algo:'sha256',hash:Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('')};
+      });
+    }
+  }catch(e){}
+  return Promise.resolve({algo:'cyrb53',hash:cyrb53(s)});
+}
+function verifyPin(pin){
+  pin=String(pin==null?'':pin).replace(/[^0-9]/g,'');
+  return hashPin(pin).then(function(h){
+    if(h.algo!==state.pin.algo){
+      if(state.pin.algo==='cyrb53') return cyrb53('ma-parking::'+String(pin))===state.pin.hash;
+      return false;
+    }
+    return h.hash===state.pin.hash;
+  });
+}
+var pinCb=null;
+function askPin(reason,cb){
+  pinCb=cb;
+  openModal('Admin PIN required','<p class="muted">'+esc(reason)+'</p><label class="field"><span class="field-label">Admin PIN</span><input id="pin-ask" class="input" type="password" inputmode="numeric" maxlength="12" onkeydown="if(event.key===\'Enter\')submitPin()"></label><div class="btn-row"><button class="btn btn-primary btn-block" onclick="submitPin()">Unlock</button></div>');
+  setTimeout(function(){ var el=document.getElementById('pin-ask'); if(el){ el.focus(); el.oninput=function(){ this.value=this.value.replace(/[^0-9]/g,''); }; } },50);
+}
+function submitPin(){
+  var v=document.getElementById('pin-ask').value.replace(/[^0-9]/g,'');
+  verifyPin(v).then(function(ok){
+    if(!ok){ toast('Wrong PIN','err'); return; }
+    closeModal();
+    var cb=pinCb; pinCb=null;
+    if(cb) cb();
+  });
+}
+/* ================= state boot ================= */
+function defaultState(hotel){
+  return { v:1, pin:null, seq:0, daySeq:{}, usedRefs:{},
+    settings:{ hotelName:hotel||'Marble Arch Hotel Nairobi', currency:'KES', rate:400, graceMin:15, bays:150 },
+    bays:[], sessions:[], audit:[] };
+}
+function buildBays(n){
+  var keep={};
+  for(var i=0;i<state.bays.length;i++) keep[state.bays[i].code]=state.bays[i].sessionId;
+  state.bays=[];
+  for(var k=1;k<=n;k++){ var code='P-'+String(k).padStart(3,'0'); state.bays.push({code:code,sessionId:(keep[code]==null?null:keep[code])}); }
+}
+function rebuildDerived(){
+  state.daySeq={}; state.usedRefs={};
+  for(var i=0;i<state.sessions.length;i++){
+    var s=state.sessions[i];
+    var m=/^MA-(\d{8})-(\d+)$/.exec(s.ticket||'');
+    if(m){ var n=parseInt(m[2],10); if(!state.daySeq[m[1]]||n>state.daySeq[m[1]]) state.daySeq[m[1]]=n; }
+    if(s.ref && (s.method==='mpesa'||s.method==='card')) state.usedRefs[String(s.ref).toUpperCase()]=s.id;
+    if(typeof s.id==='number' && s.id>state.seq) state.seq=s.id;
+  }
+}
+function doSetup(){
+  var hotel=document.getElementById('s-hotel').value.trim()||'Marble Arch Hotel Nairobi';
+  var p1=document.getElementById('s-pin1').value.replace(/[^0-9]/g,''), p2=document.getElementById('s-pin2').value.replace(/[^0-9]/g,'');
+  if(p1.length<4){ toast('PIN is too short \u2014 enter at least 4 digits (numbers only, no spaces)','err'); return; }
+  if(p1!==p2){ toast('PINs do not match','err'); return; }
+  state=defaultState(hotel);
+  buildBays(state.settings.bays);
+  hashPin(p1).then(function(h){
+    state.pin=h; audit('System set up on this PC'); save(); boot();
+    toast('Setup complete — welcome!','ok');
+  });
+}
+/* ================= core ops ================= */
+function nextTicket(entryISO){
+  var day=eatDay(entryISO);
+  var n=(state.daySeq[day]||0)+1;
+  state.daySeq[day]=n;
+  return 'MA-'+day+'-'+String(n).padStart(4,'0');
+}
+function activeByReg(reg){ reg=normReg(reg); for(var i=0;i<state.sessions.length;i++){ var s=state.sessions[i]; if(s.status==='active'&&s.reg===reg) return s; } return null; }
+function findActive(q){
+  q=String(q||'').trim().toUpperCase();
+  for(var i=0;i<state.sessions.length;i++){ var s=state.sessions[i]; if(s.status!=='active') continue; if(s.reg===normReg(q)||s.ticket===q) return s; }
+  return null;
+}
+function freeBays(){ return state.bays.filter(function(b){return b.sessionId==null;}); }
+function feeFor(entryISO,exitISO){
+  var mins=(new Date(exitISO)-new Date(entryISO))/60000;
+  if(mins<=state.settings.graceMin) return {mins:mins,fee:0,blocks:0};
+  var blocks=Math.ceil(mins/1440);
+  return {mins:mins,fee:blocks*state.settings.rate,blocks:blocks};
+}
+function doEntry(){
+  var reg=normReg(document.getElementById('e-reg').value);
+  if(reg.length<2||reg.length>10){ toast('Enter a valid registration number','err'); return; }
+  var dup=activeByReg(reg);
+  if(dup){ toast('Vehicle '+reg+' is already parked ('+dup.ticket+', bay '+(dup.bay||'—')+')','err'); return; }
+  var free=freeBays();
+  if(free.length===0){ toast('Sorry — every bay is taken. No entry possible.','err'); return; }
+  var baySel=document.getElementById('e-bay').value;
+  var bay=null;
+  if(baySel){ bay=state.bays.filter(function(b){return b.code===baySel&&b.sessionId==null;})[0]; if(!bay){ toast('That bay is no longer free','err'); refreshEntry(); return; } }
+  else bay=free[0];
+  var cat=document.getElementById('e-cat').value;
+  if(cat==='comp'){
+    var by=document.getElementById('e-compby').value.trim();
+    if(!by){ toast('Complimentary parking needs the authoriser\u2019s name','err'); return; }
+    askPin('Complimentary entry for '+reg+' (authorised by '+by+') needs the admin PIN.',function(){ createEntry(reg,bay,'comp',by); });
+    return;
+  }
+  createEntry(reg,bay,'daily','');
+}
+function createEntry(reg,bay,cat,compBy){
+  var now=new Date().toISOString();
+  state.seq+=1;
+  var s={ id:state.seq, ticket:nextTicket(now), reg:reg,
+    type:document.getElementById('e-type').value, name:document.getElementById('e-name').value.trim(),
+    phone:document.getElementById('e-phone').value.trim(), cat:cat, compBy:compBy||'',
+    compReason:(document.getElementById('e-compreason')||{value:''}).value.trim(),
+    bay:bay.code, entryISO:now, exitISO:null, base:0, paid:0, method:'', ref:'', status:'active' };
+  state.sessions.push(s);
+  bay.sessionId=s.id;
+  audit('Entry '+reg+' → '+s.ticket+' ('+bay.code+(cat==='comp'?', complimentary by '+compBy:'')+')');
+  save(); refreshEntry(); renderLive();
+  document.getElementById('e-reg').value=''; document.getElementById('e-name').value='';
+  document.getElementById('e-phone').value=''; document.getElementById('e-compby').value='';
+  document.getElementById('e-compreason').value='';
+  openModal('Ticket issued','<div class="doc-head"><div class="doc-hotel">'+esc(state.settings.hotelName)+'</div><div class="doc-sub">Parking ticket</div></div><div class="ticket-no">'+esc(s.ticket)+'</div><table class="kv"><tbody><tr><td>Registration</td><td><b>'+esc(s.reg)+'</b></td></tr><tr><td>Bay</td><td><b>'+esc(s.bay)+'</b></td></tr><tr><td>Entry</td><td>'+esc(fmtDT(s.entryISO))+'</td></tr><tr><td>Rate</td><td>'+esc(fmtMoney(state.settings.rate))+' / 24h'+(cat==='comp'?' (complimentary)':'')+'</td></tr></tbody></table><div class="btn-row"><button class="btn btn-primary btn-block" onclick="printTicket('+s.id+')">🖨 Print ticket</button></div>');
+}
+function doFind(){
+  var s=findActive(document.getElementById('x-q').value);
+  var box=document.getElementById('x-result');
+  if(!s){ box.innerHTML='<div class="card"><div class="alert alert-warn">No parked vehicle matches that search.</div></div>'; return; }
+  var q=feeFor(s.entryISO,new Date().toISOString());
+  var due=s.cat==='comp'?0:q.fee;
+  box.innerHTML='<div class="card"><h3>'+esc(s.ticket)+' · '+esc(s.reg)+'</h3>'+
+    '<table class="kv"><tbody><tr><td>Bay</td><td>'+esc(s.bay||'—')+'</td></tr>'+
+    '<tr><td>Category</td><td>'+(s.cat==='comp'?'Complimentary (by '+esc(s.compBy)+')':'Daily Customer')+'</td></tr>'+
+    '<tr><td>Entry</td><td>'+esc(fmtDT(s.entryISO))+'</td></tr>'+
+    '<tr><td>Duration</td><td>'+esc(fmtDur(q.mins))+'</td></tr>'+
+    (s.cat==='comp'?'':'<tr><td>Parking fee</td><td>'+esc(fmtMoney(q.fee))+'</td></tr>')+
+    '<tr class="total"><td>Amount due</td><td><b>'+esc(fmtMoney(due))+'</b></td></tr></tbody></table>'+
+    (due>0?'<div class="field"><span class="field-label">Payment method</span><div class="method-tabs" id="x-methods"><button class="method-tab on" data-m="cash" onclick="pickMethod(this)">💵 Cash</button><button class="method-tab" data-m="mpesa" onclick="pickMethod(this)">📱 M-Pesa</button><button class="method-tab" data-m="card" onclick="pickMethod(this)">💳 Card</button></div></div><label class="field" id="x-refwrap" style="display:none;margin-top:10px"><span class="field-label">M-Pesa code / card auth *</span><input id="x-ref" class="input reg-input" placeholder="Used once only"></label>':'<div class="alert alert-ok">Nothing to pay (grace period or complimentary).</div>')+
+    '<div class="btn-row"><button class="btn btn-primary btn-block" style="font-size:16px" onclick="doExit('+s.id+')">✓ Collect '+(due>0?esc(fmtMoney(due)):'')+' &amp; release vehicle</button></div></div>';
+  box.dataset.method='cash'; box.dataset.due=due;
+}
+function pickMethod(btn){
+  var tabs=btn.parentElement.children;
+  for(var i=0;i<tabs.length;i++) tabs[i].classList.remove('on');
+  btn.classList.add('on');
+  var m=btn.dataset.m;
+  document.getElementById('x-result').dataset.method=m;
+  document.getElementById('x-refwrap').style.display=(m==='cash')?'none':'';
+}
+function doExit(id){
+  var s=null; for(var i=0;i<state.sessions.length;i++) if(state.sessions[i].id===id) s=state.sessions[i];
+  if(!s||s.status!=='active'){ toast('Session is no longer active','err'); return; }
+  var now=new Date().toISOString();
+  var q=feeFor(s.entryISO,now);
+  var due=s.cat==='comp'?0:q.fee;
+  var method='',ref='';
+  if(due>0){
+    var box=document.getElementById('x-result');
+    method=box.dataset.method||'cash';
+    if(method==='mpesa'||method==='card'){
+      ref=normReg(document.getElementById('x-ref').value);
+      if(!ref){ toast('Enter the '+(method==='mpesa'?'M-Pesa code':'card auth number'),'err'); return; }
+      if(state.usedRefs[ref]){ toast('Reference '+ref+' was already used. Each reference works only once.','err'); return; }
+      state.usedRefs[ref]=s.id;
+    }
+  }
+  s.exitISO=now; s.base=due; s.paid=due; s.method=method; s.ref=ref; s.status='exited';
+  for(var b=0;b<state.bays.length;b++) if(state.bays[b].sessionId===s.id) state.bays[b].sessionId=null;
+  audit('Exit '+s.reg+' '+s.ticket+' · '+fmtMoney(due)+(method?' ('+method+(ref?' '+ref:'')+')':''));
+  save(); renderLive(); refreshEntry();
+  document.getElementById('x-q').value='';
+  document.getElementById('x-result').innerHTML='<div class="card"><div class="alert alert-ok">✓ '+esc(s.reg)+' released from '+esc(s.bay||'—')+'. '+(due>0?esc(fmtMoney(due))+' collected'+(method?' via '+method:'')+'.':'No charge.')+'</div><div class="btn-row"><button class="btn btn-primary" onclick="printReceipt('+s.id+')">🖨 Print receipt</button></div></div>';
+}
+/* ================= views ================= */
+function showTab(name){
+  var btns=document.querySelectorAll('.tab-btn');
+  for(var i=0;i<btns.length;i++) btns[i].classList.toggle('on',btns[i].dataset.tab===name);
+  var ps=document.querySelectorAll('.panel');
+  for(var j=0;j<ps.length;j++) ps[j].classList.toggle('on',ps[j].id==='panel-'+name);
+  if(name==='live') renderLive();
+  if(name==='report') renderReport();
+  if(name==='entry') refreshEntry();
+}
+function refreshEntry(){
+  var free=freeBays();
+  document.getElementById('entry-free').textContent=free.length+' bays free of '+state.bays.length;
+  var sel=document.getElementById('e-bay');
+  sel.innerHTML='<option value="">Auto-assign</option>'+free.map(function(b){return '<option>'+b.code+'</option>';}).join('');
+  var rows=state.sessions.filter(function(s){return s.status==='active';}).slice(-15).reverse();
+  document.getElementById('entry-active').innerHTML=rows.length?'<table class="table"><thead><tr><th>Ticket</th><th>Reg</th><th>Bay</th><th>Entry</th><th></th></tr></thead><tbody>'+
+    rows.map(function(s){return '<tr><td>'+esc(s.ticket)+'</td><td><b>'+esc(s.reg)+'</b></td><td>'+esc(s.bay||'—')+'</td><td>'+esc(fmtDT(s.entryISO))+'</td><td>'+(s.cat==='comp'?'<span class="badge badge-info">comp</span>':'')+'</td></tr>';}).join('')+'</tbody></table>':'<p class="muted">No vehicles parked right now.</p>';
+}
+function toggleComp(){ document.getElementById('e-compbox').style.display=(document.getElementById('e-cat').value==='comp')?'':'none'; }
+function renderLive(){
+  var free=freeBays().length;
+  document.getElementById('live-count').textContent=free+' free of '+state.bays.length;
+  var byId={}; for(var i=0;i<state.sessions.length;i++) byId[state.sessions[i].id]=state.sessions[i];
+  document.getElementById('live-grid').innerHTML=state.bays.map(function(b){
+    var s=b.sessionId==null?null:byId[b.sessionId];
+    var cls=!s?'bay-free':(s.cat==='comp'?'bay-comp':'bay-busy');
+    return '<button class="bay '+cls+'" onclick="bayInfo(\''+b.code+'\')"><span class="bay-code">'+b.code+'</span><span class="bay-reg">'+(s?esc(s.reg):'free')+'</span></button>';
+  }).join('');
+}
+function bayInfo(code){
+  var b=null; for(var i=0;i<state.bays.length;i++) if(state.bays[i].code===code) b=state.bays[i];
+  if(!b||b.sessionId==null){ toast(code+' is free','info'); return; }
+  var s=null; for(var j=0;j<state.sessions.length;j++) if(state.sessions[j].id===b.sessionId) s=state.sessions[j];
+  if(!s) return;
+  openModal('Bay '+code,'<table class="kv"><tbody><tr><td>Ticket</td><td><b>'+esc(s.ticket)+'</b></td></tr><tr><td>Registration</td><td><b>'+esc(s.reg)+'</b></td></tr><tr><td>Customer</td><td>'+esc(s.name||'—')+'</td></tr><tr><td>Entry</td><td>'+esc(fmtDT(s.entryISO))+'</td></tr><tr><td>Category</td><td>'+(s.cat==='comp'?'Complimentary':'Daily')+'</td></tr></tbody></table>');
+}
+function reportData(dayDash){
+  var ex=state.sessions.filter(function(s){return s.status==='exited'&&s.exitISO&&eatDayDash(s.exitISO)===dayDash;});
+  var en=state.sessions.filter(function(s){return eatDayDash(s.entryISO)===dayDash;});
+  var rev={cash:0,mpesa:0,card:0};
+  for(var i=0;i<ex.length;i++){ var s=ex[i]; if(s.paid>0&&rev[s.method]!=null) rev[s.method]+=s.paid; }
+  var comp=ex.filter(function(s){return s.cat==='comp';}).length;
+  return {exited:ex,entered:en.length,revenue:rev,total:rev.cash+rev.mpesa+rev.card,comp:comp};
+}
+function renderReport(){
+  var d=document.getElementById('r-date').value||todayEatDash();
+  var r=reportData(d);
+  var html='<div class="stat-grid">'+
+    '<div class="stat stat-ok"><div class="stat-label">Revenue</div><div class="stat-value">'+esc(fmtMoney(r.total))+'</div></div>'+
+    '<div class="stat"><div class="stat-label">Cash</div><div class="stat-value">'+esc(fmtMoney(r.revenue.cash))+'</div></div>'+
+    '<div class="stat"><div class="stat-label">M-Pesa (manual)</div><div class="stat-value">'+esc(fmtMoney(r.revenue.mpesa))+'</div></div>'+
+    '<div class="stat"><div class="stat-label">Card (manual)</div><div class="stat-value">'+esc(fmtMoney(r.revenue.card))+'</div></div>'+
+    '<div class="stat"><div class="stat-label">Entries</div><div class="stat-value">'+r.entered+'</div></div>'+
+    '<div class="stat"><div class="stat-label">Exits</div><div class="stat-value">'+r.exited.length+'</div></div>'+
+    '<div class="stat stat-warn"><div class="stat-label">Complimentary</div><div class="stat-value">'+r.comp+'</div></div></div>';
+  if(!r.exited.length) html+='<div class="card"><p class="muted">No exits recorded on this date.</p></div>';
+  else html+='<div class="card"><table class="table"><thead><tr><th>Ticket</th><th>Reg</th><th>Bay</th><th>Entry</th><th>Exit</th><th>Fee</th><th>Paid</th><th>Method</th><th>Ref</th></tr></thead><tbody>'+
+    r.exited.map(function(s){return '<tr><td>'+esc(s.ticket)+'</td><td><b>'+esc(s.reg)+'</b></td><td>'+esc(s.bay||'—')+'</td><td>'+esc(fmtDT(s.entryISO))+'</td><td>'+esc(fmtDT(s.exitISO))+'</td><td>'+esc(fmtMoney(s.base))+'</td><td>'+esc(fmtMoney(s.paid))+'</td><td>'+esc(s.method||'—')+'</td><td>'+esc(s.ref||'—')+'</td></tr>';}).join('')+'</tbody></table></div>';
+  document.getElementById('r-out').innerHTML=html;
+}
+function csvText(){
+  var d=document.getElementById('r-date').value||todayEatDash();
+  var r=reportData(d);
+  function q(v){ v=String(v==null?'':v); return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v; }
+  var lines=['Ticket,Registration,Bay,Entry (EAT),Exit (EAT),Fee,Paid,Method,Reference'];
+  for(var i=0;i<r.exited.length;i++){ var s=r.exited[i];
+    lines.push([s.ticket,s.reg,s.bay||'',fmtDT(s.entryISO),fmtDT(s.exitISO),s.base.toFixed(2),s.paid.toFixed(2),s.method||'',s.ref||''].map(q).join(','));
+  }
+  lines.push('');
+  lines.push(['SUMMARY '+d,'','','','','','','',''].map(q).join(','));
+  lines.push(['Revenue '+fmtMoney(r.total)+' (cash '+fmtMoney(r.revenue.cash)+' / mpesa '+fmtMoney(r.revenue.mpesa)+' / card '+fmtMoney(r.revenue.card)+')','','','','','','',''].map(q).join(','));
+  lines.push(['Entries '+r.entered+' / Exits '+r.exited.length+' / Complimentary '+r.comp,'','','','','','','',''].map(q).join(','));
+  return lines.join('\n');
+}
+function downloadFile(name,content,type){
+  var blob=new Blob([content],{type:type});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download=name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},3000);
+}
+function downloadCsv(){
+  var d=document.getElementById('r-date').value||todayEatDash();
+  if(!reportData(d).exited.length){ toast('Nothing to export for this date','info'); return; }
+  downloadFile('parking-report-'+d+'.csv','﻿'+csvText(),'text/csv;charset=utf-8');
+  toast('CSV downloaded (opens in Excel)','ok');
+}
+function copyCsv(){
+  var t=csvText();
+  function legacy(){
+    var ta=document.createElement('textarea'); ta.value=t; ta.style.cssText='position:fixed;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast('Report copied — paste into Excel or WhatsApp','ok'); }
+    catch(e){ toast('Copy failed — select the table manually','err'); }
+    ta.remove();
+  }
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(function(){toast('Report copied — paste into Excel or WhatsApp','ok');},legacy);
+    else legacy();
+  }catch(e){ legacy(); }
+}
+/* ================= settings ================= */
+var settingsUnlocked=false;
+function askSettings(){
+  if(settingsUnlocked){ showTab('settings'); return; }
+  askPin('Settings are protected by the admin PIN.',function(){ settingsUnlocked=true; showTab('settings'); });
+}
+function fillSettings(){
+  document.getElementById('t-hotel').value=state.settings.hotelName;
+  document.getElementById('t-rate').value=state.settings.rate;
+  document.getElementById('t-cur').value=state.settings.currency;
+  document.getElementById('t-grace').value=state.settings.graceMin;
+  document.getElementById('t-bays').value=state.settings.bays;
+  document.getElementById('audit-list').innerHTML=state.audit.length?'<table class="table"><tbody>'+
+    state.audit.slice(0,100).map(function(a){return '<tr><td style="white-space:nowrap">'+esc(fmtDT(a.t))+'</td><td>'+esc(a.msg)+'</td></tr>';}).join('')+'</tbody></table>':'<p class="muted">No activity yet.</p>';
+}
+function saveSettings(){
+  var hotel=document.getElementById('t-hotel').value.trim()||state.settings.hotelName;
+  var rate=Math.max(0,Number(document.getElementById('t-rate').value)||0);
+  var cur=(document.getElementById('t-cur').value.trim()||'KES').toUpperCase().slice(0,5);
+  var grace=Math.max(0,Math.floor(Number(document.getElementById('t-grace').value)||0));
+  var bays=Math.max(1,Math.min(2000,Math.floor(Number(document.getElementById('t-bays').value)||state.settings.bays)));
+  var maxOcc=0;
+  for(var i=0;i<state.bays.length;i++) if(state.bays[i].sessionId!=null){ var n=parseInt(state.bays[i].code.slice(2),10); if(n>maxOcc)maxOcc=n; }
+  if(bays<maxOcc){ toast('Cannot drop below bay P-'+String(maxOcc).padStart(3,'0')+' — it is occupied','err'); return; }
+  state.settings={hotelName:hotel,currency:cur,rate:rate,graceMin:grace,bays:bays};
+  buildBays(bays);
+  document.getElementById('hdr-hotel').textContent=hotel;
+  audit('Settings saved (rate '+fmtMoney(rate)+'/24h, grace '+grace+'m, '+bays+' bays)');
+  save(); refreshEntry(); renderLive(); fillSettings();
+  toast('Settings saved','ok');
+}
+function changePin(){
+  var cur=document.getElementById('p-cur').value.replace(/[^0-9]/g,''), nw=document.getElementById('p-new').value.replace(/[^0-9]/g,'');
+  verifyPin(cur).then(function(ok){
+    if(!ok){ toast('Current PIN is wrong','err'); return; }
+    if(nw.length<4){ toast('New PIN is too short \u2014 enter at least 4 digits (numbers only, no spaces)','err'); return; }
+    hashPin(nw).then(function(h){
+      state.pin=h; audit('Admin PIN changed'); save();
+      document.getElementById('p-cur').value=''; document.getElementById('p-new').value='';
+      toast('PIN changed','ok');
+    });
+  });
+}
+function downloadBackup(){
+  downloadFile('parking-backup-'+todayEatDash()+'.json',JSON.stringify(state),'application/json');
+  toast('Backup downloaded — keep it safe','ok');
+}
+function restoreBackup(input){
+  var f=input.files&&input.files[0]; if(!f) return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{
+      var obj=JSON.parse(rd.result);
+      if(!obj||obj.v!==1||!obj.pin||!obj.settings||!obj.bays||!obj.sessions) throw new Error('bad file');
+      state=obj; rebuildDerived();
+      document.getElementById('hdr-hotel').textContent=state.settings.hotelName;
+      save(); refreshEntry(); renderLive(); fillSettings();
+      var d=document.getElementById('r-date'); if(d) renderReport();
+      audit('Backup restored'); save();
+      toast('Backup restored','ok');
+    }catch(e){ toast('That file is not a valid backup','err'); }
+    input.value='';
+  };
+  rd.readAsText(f);
+}
+function resetAll(){
+  askPin('Erasing EVERYTHING needs the admin PIN.',function(){
+    if(!confirm('Delete all data on this PC (sessions, bays, log)? The PIN and settings stay.')) return;
+    var pin=state.pin, settings=state.settings;
+    state=defaultState(settings.hotelName); state.pin=pin; state.settings=settings;
+    buildBays(settings.bays); audit('All operational data erased'); save();
+    refreshEntry(); renderLive(); fillSettings(); renderReport();
+    toast('All data erased','ok');
+  });
+}
+/* ================= printing ================= */
+function printHtml(html){
+  document.getElementById('print-area').innerHTML=html;
+  document.body.classList.add('printing');
+  function done(){ document.body.classList.remove('printing'); window.onafterprint=null; }
+  window.onafterprint=done;
+  setTimeout(function(){ window.print(); setTimeout(done,1000); },60);
+}
+function receiptHtml(s,title){
+  return '<div class="doc-head"><div class="doc-hotel">'+esc(state.settings.hotelName)+'</div><div class="doc-sub">Parking Department</div></div>'+
+    '<div class="doc-title">'+title+'</div><div class="ticket-no">'+esc(s.ticket)+'</div>'+
+    '<table class="kv"><tbody><tr><td>Registration</td><td><b>'+esc(s.reg)+'</b></td></tr>'+
+    '<tr><td>Bay</td><td>'+esc(s.bay||'—')+'</td></tr>'+
+    '<tr><td>Category</td><td>'+(s.cat==='comp'?'Complimentary (by '+esc(s.compBy)+')':'Daily Customer')+'</td></tr>'+
+    '<tr><td>Entry</td><td>'+esc(fmtDT(s.entryISO))+'</td></tr>'+
+    (s.exitISO?'<tr><td>Exit</td><td>'+esc(fmtDT(s.exitISO))+'</td></tr><tr><td>Duration</td><td>'+esc(fmtDur((new Date(s.exitISO)-new Date(s.entryISO))/60000))+'</td></tr><tr><td>Parking fee</td><td>'+esc(fmtMoney(s.base))+'</td></tr><tr class="total"><td>Total paid</td><td><b>'+esc(fmtMoney(s.paid))+(s.method?' ('+esc(s.method)+(s.ref?' '+esc(s.ref):'')+')':'')+'</b></td></tr>':'<tr><td>Rate</td><td>'+esc(fmtMoney(state.settings.rate))+' / 24h</td></tr>')+
+    '</tbody></table><div class="doc-foot">Thank you for parking with us. All times East Africa Time.</div>';
+}
+function getSession(id){ for(var i=0;i<state.sessions.length;i++) if(state.sessions[i].id===id) return state.sessions[i]; return null; }
+function printTicket(id){ var s=getSession(id); if(s) printHtml(receiptHtml(s,'PARKING TICKET')); }
+function printReceipt(id){ var s=getSession(id); if(s) printHtml(receiptHtml(s,'PARKING RECEIPT')); }
+function printReport(){
+  var d=document.getElementById('r-date').value||todayEatDash();
+  var r=reportData(d);
+  var html='<div class="doc-head"><div class="doc-hotel">'+esc(state.settings.hotelName)+'</div><div class="doc-sub">Daily parking report · '+esc(d)+' (EAT)</div></div>'+
+    '<table class="kv"><tbody><tr><td>Revenue</td><td><b>'+esc(fmtMoney(r.total))+'</b></td></tr>'+
+    '<tr><td>Cash / M-Pesa / Card</td><td>'+esc(fmtMoney(r.revenue.cash))+' / '+esc(fmtMoney(r.revenue.mpesa))+' / '+esc(fmtMoney(r.revenue.card))+'</td></tr>'+
+    '<tr><td>Entries / Exits / Complimentary</td><td>'+r.entered+' / '+r.exited.length+' / '+r.comp+'</td></tr></tbody></table>';
+  if(r.exited.length){
+    html+='<table class="table"><thead><tr><th>Ticket</th><th>Reg</th><th>Bay</th><th>Entry</th><th>Exit</th><th>Paid</th><th>Method</th></tr></thead><tbody>'+
+      r.exited.map(function(s){return '<tr><td>'+esc(s.ticket)+'</td><td>'+esc(s.reg)+'</td><td>'+esc(s.bay||'—')+'</td><td>'+esc(fmtDT(s.entryISO))+'</td><td>'+esc(fmtDT(s.exitISO))+'</td><td>'+esc(fmtMoney(s.paid))+'</td><td>'+esc(s.method||'—')+'</td></tr>';}).join('')+'</tbody></table>';
+  }
+  printHtml(html);
+}
+/* ================= clock & boot ================= */
+function tick(){
+  var p=eatParts(new Date().toISOString());
+  document.getElementById('clock-time').textContent=p.hour+':'+p.minute;
+  document.getElementById('clock-date').textContent=p.day+' '+MON[Number(p.month)-1]+' '+p.year;
+}
+function boot(){
+  load();
+  if(!state||!state.pin){
+    document.getElementById('setup-view').style.display='flex';
+    document.getElementById('app').style.display='none';
+    return;
+  }
+  rebuildDerived();
+  document.getElementById('setup-view').style.display='none';
+  document.getElementById('app').style.display='';
+  document.getElementById('hdr-hotel').textContent=state.settings.hotelName;
+  document.getElementById('r-date').value=todayEatDash();
+  refreshEntry(); renderLive(); fillSettings();
+  tick(); setInterval(tick,15000);
+}
+boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marble Arch Hotel Nairobi — Parking Management System: Overview &amp; Staff Guide</title>
+<style>
+  :root {
+    --navy: #0e2a47; --navy2: #1d4e89; --gold: #c9a227; --goldsoft: #faf5e3;
+    --ink: #1c2733; --muted: #5d6d80; --line: #dde3ec; --bg: #f2f4f8;
+    --ok: #1f7a4d; --okbg: #e3f4ea; --warn: #8a5d0b; --warnbg: #fdf1d7;
+    --err: #b3261e; --errbg: #fbe7e6; --info: #1d5fb8; --infobg: #e3edfb;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); margin: 0; line-height: 1.6; }
+  .cover { background: linear-gradient(135deg, var(--navy), var(--navy2)); color: #fff; padding: 56px 24px 44px; text-align: center; }
+  .cover .mark { width: 72px; height: 72px; border-radius: 16px; background: var(--gold); color: var(--navy); font-weight: 800; font-size: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+  .cover h1 { margin: 0 0 6px; font-size: 30px; }
+  .cover p { margin: 4px 0; color: #cfdaea; }
+  .cover .doc-type { display: inline-block; margin-top: 14px; background: var(--gold); color: var(--navy); font-weight: 700; padding: 6px 18px; border-radius: 20px; font-size: 14px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 18px 60px; }
+  .card { background: #fff; border-radius: 12px; padding: 26px 28px; margin: 22px 0; box-shadow: 0 1px 5px rgba(14,42,71,.10); }
+  h2.part { font-size: 24px; color: #fff; background: var(--navy); display: inline-block; padding: 8px 22px; border-radius: 10px; margin: 34px 0 6px; }
+  h2 { font-size: 22px; color: var(--navy); border-bottom: 3px solid var(--gold); padding-bottom: 6px; margin-top: 0; }
+  h3 { font-size: 18px; color: var(--navy); margin: 22px 0 8px; }
+  h4 { font-size: 16px; margin: 16px 0 6px; }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th { text-align: left; background: var(--navy); color: #fff; padding: 9px 10px; font-size: 13px; }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f9fc; }
+  .badge { display: inline-block; border-radius: 12px; padding: 1px 10px; font-size: 12px; font-weight: 700; }
+  .b-ok { background: var(--okbg); color: var(--ok); } .b-warn { background: var(--warnbg); color: var(--warn); }
+  .b-err { background: var(--errbg); color: var(--err); } .b-info { background: var(--infobg); color: var(--info); }
+  .b-muted { background: #eef1f6; color: var(--muted); }
+  .alert { border-radius: 8px; padding: 12px 14px; font-size: 14px; margin: 12px 0; }
+  .a-ok { background: var(--okbg); border: 1px solid #bfe3cd; color: #14532d; }
+  .a-warn { background: var(--warnbg); border: 1px solid #eed9a4; color: #6b4a08; }
+  .a-err { background: var(--errbg); border: 1px solid #f3c4c1; color: #7a1a14; }
+  .a-info { background: var(--infobg); border: 1px solid #c2d6f2; color: #173f7d; }
+  .toc { columns: 2; font-size: 14px; }
+  .toc a { color: var(--navy2); text-decoration: none; display: block; padding: 3px 0; }
+  .toc a:hover { text-decoration: underline; }
+  ol.steps { padding-left: 22px; }
+  ol.steps li { margin: 8px 0; }
+  ol.steps li::marker { font-weight: 800; color: var(--navy); }
+  code { background: #eef1f6; padding: 1px 7px; border-radius: 5px; font-size: 13px; color: var(--navy); }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .kbd { display: inline-block; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 0 8px; font-size: 13px; background: #f7f9fc; font-weight: 600; }
+  .foot { text-align: center; color: var(--muted); font-size: 13px; margin-top: 30px; }
+  .checklist li { margin: 6px 0; }
+  ul { padding-left: 22px; } li { margin: 4px 0; }
+  @media (max-width: 700px) { .toc { columns: 1; } .grid2 { grid-template-columns: 1fr; } .card { padding: 18px 16px; } .cover h1 { font-size: 23px; } }
+  @media print {
+    body { background: #fff; } .card { box-shadow: none; border: 1px solid var(--line); break-inside: avoid; }
+    .cover { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h2.part { break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="mark">MA</div>
+  <h1>Marble Arch Hotel Nairobi</h1>
+  <p style="font-size:19px; color:#fff;"><strong>Parking Management System</strong></p>
+  <p>Management Overview &amp; Staff User Guide</p>
+  <p>15 September 2026 · Version 1.0</p>
+  <span class="doc-type">PART A — MANAGEMENT OVERVIEW &nbsp;·&nbsp; PART B — STAFF GUIDE</span>
+</div>
+
+<div class="wrap">
+
+<div class="card">
+  <h2>Contents</h2>
+  <div class="toc">
+    <a href="#exec"><strong>A1.</strong> Executive summary</a>
+    <a href="#access"><strong>A2.</strong> How to access the system</a>
+    <a href="#modules"><strong>A3.</strong> Modules &amp; features</a>
+    <a href="#roles"><strong>A4.</strong> User roles &amp; permissions</a>
+    <a href="#figures"><strong>A5.</strong> Key operating figures</a>
+    <a href="#status"><strong>A6.</strong> Implementation status</a>
+    <a href="#security"><strong>A7.</strong> Security &amp; controls</a>
+    <a href="#started"><strong>B1.</strong> Getting started (all staff)</a>
+    <a href="#attendant"><strong>B2.</strong> Parking Attendant guide</a>
+    <a href="#cashier"><strong>B3.</strong> Cashier guide</a>
+    <a href="#supervisor"><strong>B4.</strong> Supervisor guide</a>
+    <a href="#manager"><strong>B5.</strong> Manager / Controller / Accounts guide</a>
+    <a href="#monthly"><strong>B6.</strong> Monthly parking how-to</a>
+    <a href="#reports"><strong>B7.</strong> Reports &amp; exports how-to</a>
+    <a href="#offline"><strong>B8.</strong> Offline &amp; pending sync</a>
+    <a href="#faq"><strong>B9.</strong> Troubleshooting &amp; FAQ</a>
+    <a href="#checklists"><strong>B10.</strong> Gate checklists</a>
+  </div>
+</div>
+
+<h2 class="part">PART A — Management Overview</h2>
+
+<div class="card" id="exec">
+  <h2>A1. Executive summary</h2>
+  <p>The Marble Arch Hotel Nairobi <strong>Parking Management System</strong> runs the hotel's entire parking operation — from vehicle entry, bay allocation, ticketing and payment (cash, M-Pesa, card) through to shift handling, daily reconciliation, monthly subscriptions, complimentary parking and management reporting.</p>
+  <div class="grid2">
+    <div>
+      <h4>What it covers</h4>
+      <ul>
+        <li>Live control of <strong>150 parking bays</strong></li>
+        <li>Entry ticketing &amp; exit billing with printed receipts</li>
+        <li>Monthly subscriptions &amp; renewals</li>
+        <li>Complimentary parking (hotel guests, restaurant, staff, VIP…)</li>
+        <li>Cashier shifts with expected-vs-actual counts</li>
+        <li>End-of-day reconciliation with 3-stage approval</li>
+        <li>17 management &amp; financial reports</li>
+      </ul>
+    </div>
+    <div>
+      <h4>How it is used</h4>
+      <ul>
+        <li>Runs on <strong>desktop, laptop, tablet and mobile phones</strong></li>
+        <li>Gate screens use large controls for fast barrier operation</li>
+        <li>Every figure comes from <strong>real database records</strong> — no demo data</li>
+        <li>Every payment and vehicle movement is <strong>auditable</strong></li>
+        <li>Every privileged action is tied to a <strong>logged-in user &amp; role</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card" id="access">
+  <h2>A2. How to access the system</h2>
+  <table>
+    <tr><th>Item</th><th>Details</th></tr>
+    <tr><td><strong>Website (staff interface)</strong></td><td>Open the <em>Parking Website</em> preview (port 5173)</td></tr>
+    <tr><td><strong>Sign-in (current)</strong></td><td><span class="badge b-warn">NO LOGIN — TEMPORARY</span> The app opens straight into the dashboard as Administrator. No username or password is needed right now.</td></tr>
+    <tr><td><strong>Restoring login later</strong></td><td>Set <code>NO_LOGIN=false</code> in <code>backend/.env</code> and restart the backend. Accounts below then apply.</td></tr>
+  </table>
+  <h3>Accounts (when login is restored)</h3>
+  <table>
+    <tr><th>Username</th><th>Password</th><th>Role</th></tr>
+    <tr><td><code>admin</code></td><td><code>Admin@123</code></td><td>Administrator</td></tr>
+    <tr><td><code>manager</code></td><td><code>Demo@123</code></td><td>Manager</td></tr>
+    <tr><td><code>controller</code></td><td><code>Demo@123</code></td><td>Controller</td></tr>
+    <tr><td><code>supervisor</code></td><td><code>Demo@123</code></td><td>Supervisor</td></tr>
+    <tr><td><code>cashier</code></td><td><code>Demo@123</code></td><td>Cashier</td></tr>
+    <tr><td><code>attendant</code></td><td><code>Demo@123</code></td><td>Parking Attendant</td></tr>
+    <tr><td><code>security</code></td><td><code>Demo@123</code></td><td>Security</td></tr>
+    <tr><td><code>accounts</code></td><td><code>Demo@123</code></td><td>Accounts</td></tr>
+  </table>
+  <div class="alert a-warn">All seeded accounts must set their own password on first login. Change the administrator password before production use.</div>
+</div>
+
+<div class="card" id="modules">
+  <h2>A3. Modules &amp; features</h2>
+  <table>
+    <tr><th>Module</th><th>What it does</th></tr>
+    <tr><td><strong>Dashboard</strong></td><td>Occupancy, revenue today (cash / M-Pesa / card), vehicles in/out, outstanding balances, monthly expiry alerts, shift status, variance, 7-day charts, recent activity.</td></tr>
+    <tr><td><strong>Vehicle Entry</strong></td><td>Register vehicles with auto ticket numbers (<code>MA-YYYYMMDD-####</code>), automatic bay assignment, monthly-cover detection, duplicate-parking guard, complimentary workflow.</td></tr>
+    <tr><td><strong>Vehicle Exit</strong></td><td>Find by registration/ticket/phone, live bill quote, collect payment, apply/request discounts, STK push (when M-Pesa configured), printed receipt, automatic bay release.</td></tr>
+    <tr><td><strong>Live Parking</strong></td><td>Colour-coded map of all 150 bays (available / occupied / complimentary / monthly / reserved / out of service). Click a bay for details, move vehicles, reprint tickets.</td></tr>
+    <tr><td><strong>Parking</strong></td><td>Currently-parked list, full session history with filters, and complete vehicle history (visits, spend, last visit).</td></tr>
+    <tr><td><strong>Customers</strong></td><td>Customer database with visit history, vehicles and monthly status.</td></tr>
+    <tr><td><strong>Monthly Parking</strong></td><td>Packages, subscriptions, renewals, expiry/suspension control, payment history, printable customer records. Covered vehicles exit free; expired passes cannot be used.</td></tr>
+    <tr><td><strong>Payments</strong></td><td>All takings with verification flags (<span class="badge b-ok">verified</span> <span class="badge b-warn">manual</span> <span class="badge b-warn">pending</span>), M-Pesa status &amp; STK transactions, and the refund approval workflow.</td></tr>
+    <tr><td><strong>Shifts</strong></td><td>Open with float, auto-linked takings, close with counted actuals, variance explanations, supervisor review.</td></tr>
+    <tr><td><strong>Reconciliation</strong></td><td>End-of-day control: revenue = cash + M-Pesa + card, vehicle counts, discounts, refunds, variance — with supervisor → controller → manager approval and finalize lock.</td></tr>
+    <tr><td><strong>Reports</strong></td><td>17 reports (daily/weekly/monthly, revenue, cash, M-Pesa, card, shifts, variance, complimentary, monthly customers, vehicle history, occupancy, user activity, discounts, refunds, audit) with filters, CSV export and print letterheads.</td></tr>
+    <tr><td><strong>Promotions</strong></td><td>Promotions, discount approvals, complimentary register. Attendants can only <em>request</em> discounts — approval sits with management.</td></tr>
+    <tr><td><strong>Users &amp; Audit</strong></td><td>User administration with role matrix, and an immutable audit log of every sensitive action.</td></tr>
+    <tr><td><strong>Settings</strong></td><td>Hotel branding (logo appears on tickets, receipts, reports), rates, grace period, bay count, receipt text and terms.</td></tr>
+    <tr><td><strong>Notifications</strong></td><td>Expiring subscriptions, shift variances, pending approvals, finalised days.</td></tr>
+  </table>
+</div>
+
+<div class="card" id="roles">
+  <h2>A4. User roles &amp; permissions</h2>
+  <table>
+    <tr><th>Role</th><th>Responsibilities in the system</th></tr>
+    <tr><td><strong>Administrator</strong></td><td>Full access: users, roles, rates, settings, all reports and audit logs.</td></tr>
+    <tr><td><strong>Manager</strong></td><td>Dashboards and all reports; approves discounts, refunds and exceptions; finalises reconciled days.</td></tr>
+    <tr><td><strong>Controller</strong></td><td>Financial control: shift/payment reconciliation, controller review, variance and revenue reports.</td></tr>
+    <tr><td><strong>Supervisor</strong></td><td>Gate oversight: overrides, voids, bay moves, complimentary authorisation, shift review, supervisor recon review.</td></tr>
+    <tr><td><strong>Cashier</strong></td><td>Exit processing, payment collection, receipts, own shift reconciliation.</td></tr>
+    <tr><td><strong>Parking Attendant</strong></td><td>Entry registration, bay allocation, ticket printing, exit and payment at the gate.</td></tr>
+    <tr><td><strong>Security</strong></td><td>Read-only verification of vehicles, tickets and movements.</td></tr>
+    <tr><td><strong>Accounts</strong></td><td>Financial reports, reconciliation viewing, revenue analysis and exports.</td></tr>
+  </table>
+  <div class="alert a-info">Permissions are enforced by the server on every action — not just by hiding menu items. The full 8-role × 40-permission matrix is visible in the system under Users → <em>Show role permissions</em>.</div>
+</div>
+
+<div class="card" id="figures">
+  <h2>A5. Key operating figures (defaults, all configurable)</h2>
+  <table>
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td>Total bays</td><td><strong>150</strong> (Zones A/B/C — 140 standard, 8 reserved, 2 out of service)</td></tr>
+    <tr><td>Daily rate</td><td><strong>KES 400</strong> per 24-hour block or part thereof</td></tr>
+    <tr><td>Grace period</td><td><strong>15 minutes</strong> free</td></tr>
+    <tr><td>Hourly billing</td><td>Optional, off by default (KES 100/hour when enabled)</td></tr>
+    <tr><td>Monthly packages</td><td>Standard 6,000 · Reserved 9,000 · Corporate 7,500 · Motorcycle 2,500 (30 days)</td></tr>
+    <tr><td>Payment methods</td><td>Cash · M-Pesa · Card/PDQ (all shift-linked and auditable)</td></tr>
+    <tr><td>Complimentary revenue</td><td><strong>KES 0</strong> — but counted in occupancy and traffic statistics</td></tr>
+  </table>
+</div>
+
+<div class="card" id="status">
+  <h2>A6. Implementation status</h2>
+  <h3><span class="badge b-ok">COMPLETED</span></h3>
+  <ul>
+    <li>Architecture: React + TypeScript web app, secure API, persistent database</li>
+    <li>Authentication, 8 roles, server-side permission enforcement, audit logging</li>
+    <li>Hotel settings with logo upload (branding on tickets, receipts, reports)</li>
+    <li>150-bay live occupancy, entry/exit, ticketing, live billing engine</li>
+    <li>Cash / M-Pesa / card collection with verification flags; refunds workflow</li>
+    <li>M-Pesa Daraja architecture: STK push, server callback verification, full status tracking</li>
+    <li>Monthly packages, subscriptions, renewals, expiry enforcement and alerts</li>
+    <li>Promotions and approval-gated discounts; complimentary workflow</li>
+    <li>Shifts, 3-stage reconciliation with finalize lock, 17 reports (CSV + print)</li>
+    <li>Customers, vehicle history, global search, notifications, offline outbox</li>
+    <li>Mobile-friendly gate interface; 16 automated backend test suites — all passing</li>
+    <li>Supabase/PostgreSQL migration with Row Level Security for production hosting</li>
+  </ul>
+  <h3><span class="badge b-warn">REQUIRES EXTERNAL CREDENTIALS</span> (isolated — nothing faked)</h3>
+  <table>
+    <tr><th>Integration</th><th>Needed to go live</th><th>Current behaviour</th></tr>
+    <tr><td><strong>M-Pesa STK push</strong></td><td>Daraja consumer key/secret, shortcode, passkey, public callback URL (set in <code>backend/.env</code>)</td><td>Gate records M-Pesa takings <strong>manually from customer SMS codes</strong>, clearly flagged <span class="badge b-warn">manual / unverified</span> in every report. No fake confirmations, ever.</td></tr>
+    <tr><td><strong>Supabase production database</strong></td><td>Supabase project + Auth users</td><td>System runs on its built-in persistent database; migration SQL is ready in <code>supabase/migrations/001_init.sql</code>.</td></tr>
+  </table>
+</div>
+
+<div class="card" id="security">
+  <h2>A7. Security &amp; controls</h2>
+  <ul>
+    <li>Passwords are hashed; sessions expire; logins are throttled; no technical errors leak to users.</li>
+    <li>Payments cannot be edited or deleted — corrections go through the refund approval process.</li>
+    <li>Audit logs cannot be edited or deleted and capture user, role, action, before/after values.</li>
+    <li>Finalised reconciliation days are locked against modification.</li>
+    <li>No secrets (M-Pesa keys, service keys, passwords) exist in the web interface code.</li>
+    <li>Production checklist: restore login (<code>NO_LOGIN=false</code>), change all default passwords, set a long <code>JWT_SECRET</code>, serve over HTTPS.</li>
+  </ul>
+</div>
+
+<h2 class="part">PART B — Staff User Guide</h2>
+
+<div class="card" id="started">
+  <h2>B1. Getting started (all staff)</h2>
+  <ol class="steps">
+    <li>Open the <strong>Parking Website</strong> preview. The system opens straight into the <strong>Dashboard</strong> (no login screen at present).</li>
+    <li>Use the left menu to move between sections — you only see what your role allows.</li>
+    <li>Top bar essentials:
+      <ul>
+        <li>🔍 <strong>Search</strong> — type a registration, ticket, customer, phone or payment reference.</li>
+        <li>🅿️ <strong>Bay chip</strong> — free bays at a glance.</li>
+        <li>⏰ <strong>Shift chip</strong> — shows your open shift (<span class="badge b-warn">No shift</span> means open one before collecting money).</li>
+        <li>🔔 <strong>Bell</strong> — notifications (expiries, variances, approvals).</li>
+      </ul>
+    </li>
+    <li>On a phone, use the bottom bar: <strong>Entry · Exit · Bays · Cars</strong> for one-tap gate work.</li>
+  </ol>
+  <div class="alert a-err">Golden rule: <strong>no open shift = no money collection.</strong> The system blocks payments until you open a shift.</div>
+</div>
+
+<div class="card" id="attendant">
+  <h2>B2. Parking Attendant guide</h2>
+  <h3>Register a vehicle entry</h3>
+  <ol class="steps">
+    <li>Go to <strong>Vehicle Entry</strong>.</li>
+    <li>Type the <strong>registration</strong> (e.g. <code>KAA 123A</code>) — the system warns you if the car is already parked or has an active monthly cover.</li>
+    <li>Select <strong>vehicle type</strong>, driver <strong>name</strong> and <strong>phone</strong>.</li>
+    <li>Choose the <strong>category</strong> (Daily Customer for normal paid parking).</li>
+    <li>Leave bay on <strong>Auto-assign</strong> (recommended) or pick a free bay.</li>
+    <li>Press <strong>🎫 Issue ticket</strong>, then <strong>Print</strong> and hand the ticket to the driver.</li>
+  </ol>
+  <h3>Complimentary vehicles (hotel guest, restaurant, staff, VIP…)</h3>
+  <ol class="steps">
+    <li>Choose the matching complimentary category.</li>
+    <li>Fill in <strong>comp category</strong>, who <strong>authorised</strong> it (e.g. Duty Manager) and the reason/reference.</li>
+    <li>Only supervisors/managers can authorise — attendants will see a <span class="badge b-err">NOT AUTHORIZED</span> warning and must call one.</li>
+  </ol>
+  <h3>Live bays &amp; moving a car</h3>
+  <ul>
+    <li><strong>Live Parking</strong> shows every bay: <span class="badge b-ok">available</span> <span class="badge b-err">occupied</span> <span class="badge b-info">complimentary</span> <span class="badge b-info">monthly</span> <span class="badge b-warn">reserved</span> <span class="badge b-muted">out of service</span>.</li>
+    <li>Tap a bay to see the vehicle, ticket and entry time; use <strong>Move</strong> to relocate it (every move is logged).</li>
+  </ul>
+</div>
+
+<div class="card" id="cashier">
+  <h2>B3. Cashier guide</h2>
+  <h3>1. Open your shift</h3>
+  <ol class="steps">
+    <li>Go to <strong>Shifts → Open shift</strong>, enter your station and opening cash float.</li>
+    <li>The top bar chip changes to your shift number (e.g. <code>#12</code>). All money you collect is now linked to it.</li>
+  </ol>
+  <h3>2. Process a vehicle exit</h3>
+  <ol class="steps">
+    <li>Go to <strong>Vehicle Exit</strong>, type the <strong>registration, ticket or phone</strong> and press <strong>Find</strong>.</li>
+    <li>Check the bill: entry time, duration, fee, any discount, amounts already paid and <strong>Balance due</strong>.</li>
+    <li>Collect payment on the correct tab:
+      <ul>
+        <li>💵 <strong>Cash</strong> — enter amount, record.</li>
+        <li>📱 <strong>M-Pesa</strong> — enter amount + the <strong>transaction code from the customer's SMS</strong> (required). Recorded as <span class="badge b-warn">manual</span> until the M-Pesa API is connected — always verify the SMS.</li>
+        <li>💳 <strong>Card</strong> — enter amount + <strong>authorisation/reference number</strong> from the PDQ terminal (required), plus terminal ID.</li>
+      </ul>
+    </li>
+    <li>When balance is zero, press <strong>✅ Complete exit</strong> — the barrier copy (receipt) prints and the bay is freed automatically.</li>
+  </ol>
+  <h3>3. Discounts</h3>
+  <ul>
+    <li>Cashiers/attendants <strong>request</strong> discounts (promotion, fixed amount, percentage or free) with a reason.</li>
+    <li>A <span class="badge b-warn">pending</span> discount <strong>blocks exit</strong> until a manager approves or rejects it (in Exit or Promotions).</li>
+  </ul>
+  <h3>4. Close your shift</h3>
+  <ol class="steps">
+    <li>Go to <strong>Shifts → Close shift</strong>. The system shows what it <strong>expects</strong> per method.</li>
+    <li>Count and enter your <strong>actual</strong> cash, M-Pesa and card totals.</li>
+    <li>If anything differs, you <strong>must write an explanation</strong> — control is notified automatically.</li>
+  </ol>
+</div>
+
+<div class="card" id="supervisor">
+  <h2>B4. Supervisor guide</h2>
+  <ul>
+    <li><strong>Duplicate / “already parked”:</strong> at Entry, tick <strong>Supervisor override</strong> to admit the vehicle anyway (audited).</li>
+    <li><strong>Backdate entry:</strong> with override ticked, set the true entry time (e.g. vehicle admitted during a network outage).</li>
+    <li><strong>Wrong entry:</strong> open the session (Parking or Live view) → <strong>Void</strong> with a reason. Sessions with payments cannot be voided — use refunds.</li>
+    <li><strong>Reserved bays:</strong> assignable to monthly-reserved vehicles, VIP/management complimentary, or by override.</li>
+    <li><strong>Complimentary:</strong> record the authoriser and reason at entry; review the register under Promotions → Complimentary.</li>
+    <li><strong>Shift review:</strong> open any closed shift and mark it reviewed.</li>
+    <li><strong>Reconciliation:</strong> perform the <strong>supervisor review</strong> step on the day's figures.</li>
+  </ul>
+</div>
+
+<div class="card" id="manager">
+  <h2>B5. Manager / Controller / Accounts guide</h2>
+  <h3>End-of-day reconciliation</h3>
+  <ol class="steps">
+    <li>Open <strong>Reconciliation</strong> and pick the date. Figures are computed live from transactions.</li>
+    <li><strong>Save draft</strong> (controller), then reviews in order: <strong>Supervisor → Controller → Manager finalize</strong>.</li>
+    <li>Once <span class="badge b-ok">finalized</span>, the day is <strong>locked</strong> — it cannot be edited.</li>
+  </ol>
+  <h3>Money oversight</h3>
+  <ul>
+    <li><strong>Payments → Refunds:</strong> approve/reject requests, then mark approved ones paid.</li>
+    <li><strong>Promotions → Discounts:</strong> approve/reject pending discount requests.</li>
+    <li><strong>Reports → Variance:</strong> every non-zero shift variance with its explanation.</li>
+    <li><strong>Audit Logs:</strong> who did what, when, with before/after values.</li>
+  </ul>
+</div>
+
+<div class="card" id="monthly">
+  <h2>B6. Monthly parking how-to</h2>
+  <ol class="steps">
+    <li>Open <strong>Monthly Parking → New subscription</strong> (you need an open shift — the fee is recorded against it).</li>
+    <li>Enter customer, company, phone, <strong>registration</strong>, package and payment reference. Expiry auto-calculates (30 days).</li>
+    <li>At entry, covered vehicles are detected automatically and park under the monthly category — <strong>no daily charge</strong>.</li>
+    <li><strong>Renew</strong> from the subscription record (continues the day after expiry). <strong>Suspend</strong> misused passes; expired passes are rejected at entry automatically.</li>
+    <li>Watch <strong>days-remaining</strong> badges and dashboard/bell alerts for expiries within 7 days.</li>
+  </ol>
+</div>
+
+<div class="card" id="reports">
+  <h2>B7. Reports &amp; exports how-to</h2>
+  <ol class="steps">
+    <li>Open <strong>Reports</strong>, pick one of the 17 reports on the left.</li>
+    <li>Set <strong>From / To</strong> dates (plus user, method or search where offered) and press <strong>Run</strong>.</li>
+    <li>Press <strong>⬇ CSV</strong> to download for Excel, or <strong>🖨 Print</strong> for a hotel-letterhead printout/PDF.</li>
+  </ol>
+  <div class="alert a-info">Financial reports (revenue, cash, M-Pesa, card, variance, discounts, refunds) are visible only to roles with financial permission.</div>
+</div>
+
+<div class="card" id="offline">
+  <h2>B8. Offline &amp; pending sync</h2>
+  <ul>
+    <li>If the network drops mid-operation, entries, exits and payments are saved to a local <strong>outbox</strong> instead of being lost.</li>
+    <li>They always show as <span class="badge b-warn">Pending sync</span> — never as stored records.</li>
+    <li>When back online, tap the <strong>📤 N pending sync</strong> chip in the top bar to send them to the server.</li>
+  </ul>
+</div>
+
+<div class="card" id="faq">
+  <h2>B9. Troubleshooting &amp; FAQ</h2>
+  <table>
+    <tr><th>Message / situation</th><th>What to do</th></tr>
+    <tr><td>“Already parked” / duplicate session</td><td>The car is inside on another ticket. Call a supervisor to override if it is genuinely a second entry.</td></tr>
+    <tr><td>“Open a shift before collecting payments”</td><td>Go to Shifts and open your shift first.</td></tr>
+    <tr><td>Exit blocked — discount awaiting approval</td><td>A manager must approve/reject it (Exit screen or Promotions).</td></tr>
+    <tr><td>“Outstanding balance…” at exit</td><td>Collect the full balance first; partial payments are kept on the ticket.</td></tr>
+    <tr><td>“Variance requires an explanation”</td><td>Counted totals differ from expected — write the reason to close the shift.</td></tr>
+    <tr><td>M-Pesa / card reference required</td><td>Type the SMS transaction code (M-Pesa) or PDQ auth code (card) — they are mandatory.</td></tr>
+    <tr><td>Reserved bay refused</td><td>Reserved bays need a monthly-reserved or authorised vehicle, or supervisor override.</td></tr>
+    <tr><td>Monthly pass rejected at entry</td><td>It is expired, suspended or not yet started — renew it under Monthly Parking.</td></tr>
+    <tr><td>Day is finalized / cannot edit</td><td>Correct — finalised days are locked. Raise any correction with management for the next open day.</td></tr>
+    <tr><td>“No parking bays available”</td><td>The lot is full — admit only with supervisor override (no bay assigned).</td></tr>
+  </table>
+</div>
+
+<div class="card" id="checklists">
+  <h2>B10. Gate checklists</h2>
+  <div class="grid2">
+    <div>
+      <h4>🚗 Entry</h4>
+      <ul class="checklist">
+        <li>☐ Registration typed correctly</li>
+        <li>☐ Right category (paid vs complimentary)</li>
+        <li>☐ Complimentary: authoriser + reason filled</li>
+        <li>☐ Ticket printed &amp; handed over</li>
+      </ul>
+    </div>
+    <div>
+      <h4>🏁 Exit</h4>
+      <ul class="checklist">
+        <li>☐ Correct vehicle found (reg/ticket/phone)</li>
+        <li>☐ Bill checked (duration, fee, discounts)</li>
+        <li>☐ Payment recorded on the right method + reference</li>
+        <li>☐ Balance zero → Complete exit → receipt printed</li>
+      </ul>
+    </div>
+  </div>
+  <h4>⏰ Shift end</h4>
+  <ul class="checklist">
+    <li>☐ Takings counted per method ☐ Actuals entered ☐ Variance explained (if any) ☐ Shift closed</li>
+  </ul>
+</div>
+
+<div class="foot">
+  Marble Arch Hotel Nairobi — Parking Management System · Overview &amp; Staff Guide v1.0 · 15 September 2026<br>
+  Login is temporarily disabled (auto sign-in). All actions remain audited.
+</div>
+
+</div>
+<div class="card" style="margin-top:18px">
+<h2>B7 &middot; PDF reports &amp; phone sharing</h2>
+<p>Every report (all 17) and the Daily Reconciliation now carry <span class="k">PDF</span> and <span class="k">Share</span> buttons.</p>
+<ul>
+<li><span class="k">PDF</span> &ndash; downloads a letterheaded PDF (hotel logo, name, contacts, footer) of the current report.</li>
+<li><span class="k">Share</span> on a phone &ndash; opens the phone share sheet so the actual PDF file can be sent straight to WhatsApp or Email.</li>
+<li><span class="k">Share</span> on a computer &ndash; shows the PDF in a preview pane with: download, print / save-as-PDF, WhatsApp / Email summary links, one-tap copy of the summary, and a text box for manual copying.</li>
+</ul>
+<p class="muted">PDFs carry the same figures as the on-screen report &mdash; cash, M-Pesa (verified/manual split), card, refunds, net revenue, vehicle counts, and approval names where applicable.</p>
+</div>
+</body>
+</html>
