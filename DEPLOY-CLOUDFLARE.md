@@ -44,3 +44,20 @@ all credentials before going live. Never use an ephemeral disk for parking
 data. Back up the database regularly. M-Pesa STK push requires separately
 configured Daraja credentials and a public callback URL; without them, only
 manual recording is available.
+
+## Branch previews
+
+Cloudflare's branch preview deploy command is `npx wrangler preview`, while
+production uses `npx wrangler deploy`. The empty `previews` block in
+`wrangler.jsonc` enables that preview command; assets remain configured at the
+top level. Preview deployments do **not** inherit production variables. To use
+a preview API, configure `BACKEND_ORIGIN` separately with a staging backend,
+for example in `previews.vars` in the branch configuration, or as a preview
+secret using `npx wrangler preview secret put BACKEND_ORIGIN --name <preview-name>`.
+A preview pointed at production can change real parking data, so prefer an
+isolated staging database. Without a preview backend, `/api` returns 503 even
+when the static preview deploy succeeds.
+
+The old `tsc: not found` production build was from a revision that did not
+contain the fix. Production must deploy a revision containing these changes; a
+successful branch preview does not automatically update the production branch.
