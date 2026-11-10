@@ -518,6 +518,11 @@ async function seed(db) {
   const roleCount = db.prepare('SELECT COUNT(*) c FROM roles').get().c;
   if (roleCount > 0) return; // already seeded
 
+  // Never create a production administrator with a public default password.
+  if (process.env.NODE_ENV === 'production' && (!process.env.SEED_ADMIN_PASSWORD || process.env.SEED_ADMIN_PASSWORD.length < 12 || process.env.SEED_ADMIN_PASSWORD === 'Admin@123')) {
+    throw new Error('Set SEED_ADMIN_PASSWORD to a strong password of at least 12 characters before initializing a production database.');
+  }
+
   const insRole = db.prepare('INSERT INTO roles (name, description, created_at) VALUES (?,?,?)');
   const insPerm = db.prepare('INSERT INTO permissions (code, description) VALUES (?,?)');
   const insRP = db.prepare('INSERT INTO role_permissions (role_id, permission_id) VALUES (?,?)');
@@ -549,10 +554,10 @@ async function seed(db) {
     ['Demo Attendant', 'attendant', 'Parking Attendant'], ['Demo Security', 'security', 'Security'],
     ['Demo Accounts', 'accounts', 'Accounts']
   ];
-  const demoHash = await hashPassword('Demo@123');
+  const demoHash = process.env.NODE_ENV === 'production' ? null : await hashPassword('Demo@123');
   const insUser = db.prepare(`INSERT INTO users (full_name, username, email, phone, password_hash, role_id, active, must_change_password, created_at, updated_at)
     VALUES (?,?,?,?,?,?,1,1,?,?)`);
-  for (const [name, uname, role] of demos) {
+  for (const [name, uname, role] of (demoHash ? demos : [])) {
     insUser.run(name, uname, `${uname}@marblearchhotel.co.ke`, '', demoHash, roleIds[role], now, now);
   }
 
@@ -658,8 +663,13 @@ async function openDatabase(dbPath) {
   db.pragma('synchronous = FULL');
   db.pragma('foreign_keys = ON');
   db.exec(SCHEMA);
-  await seed(db);
-  migrate(db);
+  try {
+    await seed(db);
+    migrate(db);
+  } catch (error) {
+    db.close();
+    throw error;
+  }
   for (const suffix of ['-wal', '-shm']) {
     try { fs.unlinkSync(dbPath + suffix); } catch {}
   }

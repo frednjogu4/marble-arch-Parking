@@ -30,7 +30,7 @@ generated `JWT_SECRET` + `SEED_ADMIN_PASSWORD`.
 3. **Change the admin password** in the app right away
 
 ## Verify it worked
-- `https://<your-service>.onrender.com/api/health` returns `{"status":"ok",...}`
+- `https://<your-service>.onrender.com/api/health` returns `{"ok":true,"db":"up",...}`
 - `/` shows the login page (NOT a JSON message)
 - `/api/dashboard` without login returns 401
 - Restart the service → log in again → data you entered is still there (disk works)
@@ -47,3 +47,5 @@ generated `JWT_SECRET` + `SEED_ADMIN_PASSWORD`.
 ## Costs (Oct 2026 pricing)
 Starter $7/mo + 1 GB disk $0.25/mo ≈ **$7.25/mo**. Keep the disk — without it
 SQLite resets on every deploy.
+
+Fresh production databases do not create demo users. Existing databases may still contain demo accounts; disable or reset them before deployment. To put Cloudflare in front of this service, see [DEPLOY-CLOUDFLARE.md](DEPLOY-CLOUDFLARE.md).

@@ -4,7 +4,7 @@ A complete, working parking operation system: vehicle entry → exit → payment
 shifts → reconciliation → reporting, with role-based access, audit logging and a
 mobile-friendly gate interface.
 
-**The workspace was empty, so the system was built fresh (no existing code to preserve).**
+For the Cloudflare Worker build shown in the deployment logs, see [DEPLOY-CLOUDFLARE.md](DEPLOY-CLOUDFLARE.md). The Worker requires a separately hosted Node/SQLite backend with persistent storage; Cloudflare does not run the API itself.
 
 ## Quick start
 
@@ -35,15 +35,11 @@ itself at `http://localhost:4000`.
 | `admin`     | `Admin@123`| Administrator     |
 | `manager` … `accounts` | `Demo@123` | Demo per role |
 
-All seeded accounts **must change their password on first login**.
+The application flags seeded accounts for a password change on first login; change passwords immediately. (This flag is not a server-side restriction on other actions.)
 Change the admin password immediately in production, and set
 `JWT_SECRET` + `SEED_ADMIN_PASSWORD` in `backend/.env`.
 
-> **Temporary open access:** `OPEN_ACCESS=true` is currently set in
-> `backend/.env`, so sign-in needs a username only (no password).
-> `NO_LOGIN=true` skips the login screen entirely (auto signed in as admin).
-> To restore login later: set both to `false` and restart
-> the backend — no code changes needed.
+> Local development can optionally enable `OPEN_ACCESS` or `NO_LOGIN`. Both must remain disabled in production; production startup rejects them. Fresh production databases seed only the administrator, not the demo accounts. Existing databases must be secured separately.
 
 ## Architecture
 
@@ -106,7 +102,7 @@ service-role key server-side only.
 ## Testing
 
 ```bash
-npm test   # 16 backend suites: entry, duplicates, exit, cash/M-Pesa/card,
+npm test   # backend tests: entry, duplicates, exit, cash/M-Pesa/card,
            # complimentary, monthly + expiry, discounts, shifts, recon lock,
            # RBAC, audit trail, report totals, move/void
 ```
