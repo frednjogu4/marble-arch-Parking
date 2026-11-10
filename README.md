@@ -183,9 +183,13 @@ stay flagged `manual` (unverified) in every report.
 - Correctness carried over: East Africa Time throughout, per-day ticket sequences that cannot collide after midnight, one-time M-Pesa/card references, complimentary parking requiring authoriser name + PIN.
 - Verified with a 15-group runtime harness (setup, entry, duplicates, fee math, find/exit, ref reuse, comp PIN gate, sequencing, report/CSV, settings, PIN change, restore, full lot). Data lives only in that browser — download a backup from Settings daily.
 
-## Production deploy (Railway — recommended)
+## Production deploy (Render or Railway)
 
 Single-service mode: the backend serves the built UI itself on one port.
+`render.yaml` (Blueprint: Starter + 1 GB disk at `/data`, `/api/health`
+healthcheck, generated secrets) and `Dockerfile` + `railway.json` are provided
+at the repo root — pick one host. Both need `DB_PATH=/data/parking.db` on a
+persistent disk; free tiers without disks will reset SQLite on every deploy.
 
 ```bash
 # 1. Build the UI once (creates frontend/dist)

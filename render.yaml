@@ -1,0 +1,29 @@
+# Marble Arch Parking — Render Blueprint (one-click deploy).
+# Push the repo root (with Dockerfile + this file) to GitHub, then in Render:
+# New → Blueprint → select the repo → Apply. Secrets below auto-generate.
+# Starter plan required: free services cannot attach the persistent disk,
+# and SQLite without a disk resets on every deploy.
+
+services:
+  - type: web
+    name: marble-arch-parking
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    disk:
+      name: parking-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: DB_PATH
+        value: /data/parking.db
+      - key: NODE_ENV
+        value: production
+      - key: OPEN_ACCESS
+        value: "false"
+      - key: NO_LOGIN
+        value: "false"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: SEED_ADMIN_PASSWORD
+        generateValue: true
