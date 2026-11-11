@@ -367,6 +367,12 @@ function createApp(db) {
 }
 
 async function main() {
+  if (process.env.NODE_ENV === 'production' && (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32 || process.env.JWT_SECRET === 'dev-secret-CHANGE-ME')) {
+    throw new Error('Set JWT_SECRET to a long random secret of at least 32 characters in production.');
+  }
+  if (process.env.NODE_ENV === 'production' && (process.env.OPEN_ACCESS === 'true' || process.env.NO_LOGIN === 'true')) {
+    throw new Error('OPEN_ACCESS and NO_LOGIN must be disabled in production.');
+  }
   const db = await openDatabase(DB_PATH);
   const app = createApp(db);
   const port = Number(process.env.PORT || 4000);
