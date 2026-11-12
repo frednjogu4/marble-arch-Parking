@@ -70,7 +70,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const has = (...codes: string[]) => {
-    const p = user?.permissions || [];
+    const p = Array.isArray(user?.permissions) ? user.permissions : [];
     return codes.some(c => p.includes(c));
   };
 

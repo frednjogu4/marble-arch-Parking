@@ -1,16 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { get, post, fmtDT, errMsg } from '../api';
+import { ApiError, get, post, fmtDT, errMsg } from '../api';
 import { useToast, Badge, Empty, CenterSpin } from '../ui';
 
 export default function Notifications() {
   const toast = useToast();
   const [n, setN] = useState<any>(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const load = async () => {
+    setLoading(true);
+    setError('');
     try {
       setN(await get('/api/notifications'));
-    } catch (e: any) { toast(errMsg(e), 'err'); }
+    } catch (e: any) {
+      setError(e instanceof ApiError && e.status === 404
+        ? 'The connected API does not provide notifications. Ask your administrator to connect the correct parking backend.'
+        : errMsg(e));
+    } finally {
+      setLoading(false);
+    }
   };
   useEffect(() => { load(); }, []);
 
@@ -18,19 +28,29 @@ export default function Notifications() {
     try {
       await post(`/api/notifications/${id}/read`);
       load();
-    } catch {}
+    } catch (e: any) { toast(errMsg(e), 'err'); }
   };
   const markAll = async () => {
     try {
       await post('/api/notifications/read-all');
       load();
-    } catch {}
+    } catch (e: any) { toast(errMsg(e), 'err'); }
   };
 
-  if (!n) return <CenterSpin />;
+  if (!n && loading) return <CenterSpin />;
+  if (!n) return (
+    <div className="page">
+      <div className="card" role="alert">
+        <h2>Notifications unavailable</h2>
+        <p>{error || 'Could not load notifications.'}</p>
+        <button className="btn" onClick={load}>Try again</button>
+      </div>
+    </div>
+  );
 
   return (
     <div className="page">
+      {error && <div className="alert alert-err" role="alert">{error} <button className="link" onClick={load}>Try again</button></div>}
       <div className="page-head">
         <h2>Notifications ({n.unread} unread)</h2>
         <button className="btn btn-sm" onClick={markAll}>Mark all read</button>

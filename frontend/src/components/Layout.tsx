@@ -252,6 +252,18 @@ export default function Layout() {
             </div>
           </header>
 
+          {!Array.isArray(user?.permissions) && (
+            <div className="pw-banner no-print" role="alert">
+              Your account permissions were not returned by the parking API. The menu cannot be displayed.
+              Ask your administrator to connect the correct backend, then sign out and sign in again.
+            </div>
+          )}
+          {Array.isArray(user?.permissions) && user.permissions.length === 0 && (
+            <div className="pw-banner no-print" role="alert">
+              Your account has no assigned permissions. Ask an administrator to review your access.
+            </div>
+          )}
+
           {!noLogin && user?.must_change_password === 1 && (
             <div className="pw-banner no-print">
               You are using a temporary password. <button className="link" onClick={() => setShowPw(true)}>Change it now</button>.
