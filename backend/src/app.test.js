@@ -54,6 +54,18 @@ test.before(async () => {
 });
 test.after(async () => { server.close(); db.close(); });
 
+test('administrator profile includes navigation permissions and notifications endpoint exists', async () => {
+  const profile = await api('GET', '/api/auth/me', null, adminTok);
+  assert.equal(profile.status, 200);
+  assert.ok(Array.isArray(profile.json.user.permissions));
+  assert.ok(profile.json.user.permissions.includes('dashboard.view'));
+  assert.ok(profile.json.user.permissions.includes('users.manage'));
+  const notifications = await api('GET', '/api/notifications', null, adminTok);
+  assert.equal(notifications.status, 200);
+  assert.ok(Array.isArray(notifications.json.stored));
+  assert.ok(Array.isArray(notifications.json.alerts));
+});
+
 test('1. login works, wrong password rejected', async () => {
   const bad = await api('POST', '/api/auth/login', { username: 'admin', password: 'nope' });
   assert.equal(bad.status, 401);
